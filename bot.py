@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import telebot
 from telebot import types
 from config import BOT_TOKEN, CHANNEL_USERNAME
