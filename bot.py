@@ -7,7 +7,7 @@ bot = telebot.TeleBot(BOT_TOKEN)
 init_db()
 
 pending_referrals = {}
-ADMINS = [7236220432] 
+ADMINS = [7236220432,5660220707] 
 
 admin_states = {}
 temp_data = {}
