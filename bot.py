@@ -7,15 +7,13 @@ bot = telebot.TeleBot(BOT_TOKEN)
 init_db()
 
 pending_referrals = {}
-ADMINS = [7236220432,5660220707,6981585339] 
+ADMINS = [7236220432, 5660220707, 6981585339]
 
 admin_states = {}
 temp_data = {}
 
 @bot.message_handler(commands=['start'])
 def start_handler(message):
-
-
     user_id = message.from_user.id
     args = message.text.split()
 
@@ -64,8 +62,7 @@ def rules(message):
 def ref_link(message):
     user_id = message.from_user.id
     link = f"https://t.me/{bot.get_me().username}?start={user_id}"
-    bot.send_message(user_id, f"🎯 Ваша реферальная ссылка:\n{link}\n💸 1 реферал = 200 миллионов валюты Grow a garden\n Вывод доступен от 5 рефералов.")
-
+    bot.send_message(user_id, f"🎯 Ваша реферальная ссылка:\n{link}\n💸 1 реферал = 200 миллионов валюты Grow a garden\nВывод доступен от 5 рефералов.")
 
 @bot.message_handler(func=lambda m: m.text == "👥 Мои рефералы")
 def my_refs(message):
@@ -86,8 +83,6 @@ def my_balance(message):
     user_id = message.from_user.id
     balance = get_balance(user_id)
     bot.send_message(user_id, f"💰 Ваш баланс: {balance:,} монет")
-
-# Админка
 
 @bot.message_handler(func=lambda m: m.text == "🛠 Админ панель")
 def admin_panel(message):
@@ -143,6 +138,19 @@ def process_admin_action(message):
         except ValueError:
             bot.send_message(admin_id, "Введите корректный ID.")
 
+@bot.message_handler(func=lambda m: m.text == "🔙 Назад")
+def back_to_main_menu(message):
+    user_id = message.from_user.id
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.add("🎯 Моя реф. ссылка", "👥 Мои рефералы", "💰 Мой баланс", "💱 Вывод", "❗️ Правила")
+    if user_id in ADMINS:
+        markup.add("🛠 Админ панель")
+
+    bot.send_message(user_id, "🔙 Возвращаемся в главное меню", reply_markup=markup)
+
+    admin_states.pop(user_id, None)
+    temp_data.pop(user_id, None)
+
 print("Бот запущен.")
 bot.infinity_polling()
-
