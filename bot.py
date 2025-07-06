@@ -64,7 +64,8 @@ def rules(message):
 def ref_link(message):
     user_id = message.from_user.id
     link = f"https://t.me/{bot.get_me().username}?start={user_id}"
-    bot.send_message(user_id, f"🎯 Ваша реферальная ссылка:\n{link}\n💸 1 реферал = 200 миллионов валюты Grow a garden\n Вывод доступен от 10 рефералов.")
+    bot.send_message(user_id, f"🎯 Ваша реферальная ссылка:\n{link}\n💸 1 реферал = 200 миллионов валюты Grow a garden\n Вывод доступен от 5 рефералов.")
+
 
 @bot.message_handler(func=lambda m: m.text == "👥 Мои рефералы")
 def my_refs(message):
