@@ -21,7 +21,7 @@ def add_user(user_id, invited_by=None):
         cursor.execute("INSERT INTO users (user_id, invited_by, balance) VALUES (?, ?, ?)",
                        (user_id, invited_by, 0))
         if invited_by:
-            cursor.execute("UPDATE users SET balance = balance + 100000000 WHERE user_id = ?", (invited_by,))
+            cursor.execute("UPDATE users SET balance = balance + 200000000 WHERE user_id = ?", (invited_by,))
     conn.commit()
     conn.close()
 
